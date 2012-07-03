@@ -21,8 +21,6 @@ ProcedureDLL AttachProcess(Instance)
   ;  for the first time. All init stuffs can be done here (but not DirectX init)
   Define processID.l = GetCurrentProcessId_()
   
-  LOG_LEVEL = #LOG_DEBUG
-  
   *log = New_Logger("pureair.dll")
   
   *log\info(#CRLF$)
@@ -58,18 +56,36 @@ Procedure ModalMessage(*params.MessageParameters)
   *log\Debug (ResultDescription(result, "FREDispatchStatusEventAsync"))
 EndProcedure
 
+
 ;CDecl
 ProcedureC.l showDialog(ctx.l, funcData.l, argc.l, *argv.FREObjectArray)
-  *log\Debug("Invoked showDialog")
+  *log\info("Invoked showDialog")
+  
+  Define result.l
+  
+  ;ActionScriptData example
+  Define actionScriptObject.l, actionScriptInt.l, type.l
+  result = FREGetContextActionScriptData(ctx, @actionScriptObject)
+  *log\Debug(ResultDescription(result, "FREGetContextActionScriptData"))
+  
+  result = FREGetObjectType(actionScriptObject, @type)
+  *log\Debug("result=" + ResultDescription(result, "FREGetObjectType"))
+  *log\info("type=" + TypeDescription(type))
+  
+  result = FREGetObjectAsInt32(actionScriptObject, @actionScriptInt)
+  *log\Debug("result=" + ResultDescription(result, "FREGetObjectAsInt32"))
+  
+  *log\info("actionScriptInt: " + Str(actionScriptInt))
+
   
   ;function data example
   Define funcDataS.s
   funcDataS = PeekS(funcData, -1, #PB_Ascii)
-  *log\Debug("funcData=" + funcDataS)
+  *log\info("funcData=" + funcDataS)
   
-  *log\Debug("arg size: " + Str(fromULong(argc)))
+  *log\info("arg size: " + Str(fromULong(argc)))
 
-  Define result.l, resultObject.l, length.l, booleanArg.l, dwFlags.l, message.s, *string.Ascii
+  Define resultObject.l, length.l, booleanArg.l, dwFlags.l, message.s, *string.Ascii
   
   result = FREGetObjectAsBool(*argv\object[0], @booleanArg)
   *log\Debug("result=" + ResultDescription(result, "FREGetObjectAsBool"))
@@ -81,16 +97,16 @@ ProcedureC.l showDialog(ctx.l, funcData.l, argc.l, *argv.FREObjectArray)
   *log\Debug("result=" + ResultDescription(result, "FREGetObjectAsUTF8"))
   message = PeekS(*string, fromULong(length) + 1)
   
-  *log\Debug("booleanArg=" + Str(fromULong(booleanArg)))
-  *log\Debug("dwFlags=" + Str(dwFlags))
-  *log\Debug("message=" + Utf8ToUnicode(message))
+  *log\info("booleanArg=" + Str(fromULong(booleanArg)))
+  *log\info("dwFlags=" + Str(dwFlags))
+  *log\info("message=" + Utf8ToUnicode(message))
   
   ;native data example
   Define native.l, nativeData.s
   result = FREGetContextNativeData(ctx, @native)
   *log\Debug(ResultDescription(result, "FREGetContextNativeData"))
   nativeData = PeekS(native, -1, #PB_Ascii)
-  *log\Debug("FREGetContextNativeData=" + nativeData)
+  *log\info("FREGetContextNativeData=" + nativeData)
   
   
   Define *params.MessageParameters = AllocateMemory(SizeOf(MessageParameters))
@@ -107,9 +123,12 @@ ProcedureC.l showDialog(ctx.l, funcData.l, argc.l, *argv.FREObjectArray)
   ProcedureReturn resultObject
 EndProcedure
 
+
 ;CDecl
 ProcedureC contextInitializer(extData.l, ctxType.s, ctx.l, *numFunctions.Long, *functions.Long)
-  *log\Debug("create context: " + Str(ctx) + "=" + Utf8ToUnicode(ctxType))
+  *log\info("create context: " + Str(ctx) + "=" + Utf8ToUnicode(ctxType))
+  
+  Define result.l
   
   ;exported extension functions count:
   Define size.l = 1 
@@ -135,39 +154,36 @@ ProcedureC contextInitializer(extData.l, ctxType.s, ctx.l, *numFunctions.Long, *
   extData = #Null
   
   ;native data example
-  Define result.l
   result = FRESetContextNativeData(ctx, asGlobal("FRESetContextNativeData"))
   *log\Debug(ResultDescription(result, "FRESetContextNativeData"))
   
-  *log\Debug("create context complete");
+  *log\info("create context complete");
 EndProcedure 
+
 
 ;CDecl
 ProcedureC contextFinalizer(ctx.l)
-  *log\Debug("dispose context: " + Str(ctx))
+  *log\info("dispose context: " + Str(ctx))
 EndProcedure 
 
 
 ;CDecl
 ProcedureCDLL initializer(extData.l, *ctxInitializer.Long, *ctxFinalizer.Long)
-  *log\Debug("initialize extension")
-  extData = #Null
   *ctxInitializer\l = @contextInitializer()
   *ctxFinalizer\l = @contextFinalizer()
-  *log\Debug("initialize extension complete")
 EndProcedure 
+
 
 ;CDecl
 ;this method is never called on Windows...
 ProcedureCDLL finalizer(extData.l)
-  *log\Debug("finalize extension")
+  ;do nothing
 EndProcedure 
 
 
 
 
 ; IDE Options = PureBasic 4.61 (Windows - x86)
-; CursorPosition = 87
-; FirstLine = 105
+; CursorPosition = 22
 ; Folding = --
 ; EnableXP

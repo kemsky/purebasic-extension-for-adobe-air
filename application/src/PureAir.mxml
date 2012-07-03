@@ -30,7 +30,7 @@
             log.info("started: debug {0}", Capabilities.isDebugger);
             NativeApplication.nativeApplication.addEventListener(Event.EXITING, onExit, false, 0, true);
 
-            extension = new Extension("PureAir", Capabilities.isDebugger ? 0 : 2);
+            extension = new Extension("PureAir", 2);
         }
 
         private function onExit(event:Event):void
@@ -40,7 +40,7 @@
 
         private function onClick(event:MouseEvent):void
         {
-            log.info("test result: " + extension.showDialog(true, 3, "Нажмите любую кнопку"));
+            log.info("showDialog() result: " + extension.showDialog(true, 3, "Нажмите любую кнопку"));
         }
 
         private function onUncaughtError(event:UncaughtErrorEvent):void

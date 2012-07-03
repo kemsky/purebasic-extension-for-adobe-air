@@ -40,7 +40,7 @@ package com.pure
          *    <li>#LOG_DISABLED   = 4</li>
          * </ul>
          */
-        public function Extension(contextType:String = "PureAir", debugLevel:int = 4)
+        public function Extension(contextType:String = "PureAir", actionScriptData:int = 4)
         {
             //random type
             this.contextType = contextType + Math.round(Math.random() * 100000);
@@ -62,8 +62,8 @@ package com.pure
                     //listen for extension events
                     _context.addEventListener(StatusEvent.STATUS, onStatusEvent);
 
-                    //set extension debug level
-                    _context.actionScriptData = debugLevel;
+                    //set actionScript data
+                    _context.actionScriptData = actionScriptData;
                 }
             }
             catch(e:Error)
