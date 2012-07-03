@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               creationComplete="initializeApplication()"
+               uncaughtError="onUncaughtError(event)">
+    <fx:Declarations>
+        <!-- Place non-visual elements (e.g., services, value objects) here -->
+    </fx:Declarations>
+    <fx:Script>
+		<![CDATA[
+        import com.pure.Extension;
+
+        import logging.ConsoleTarget;
+        import logging.TextTarget;
+
+        import mx.logging.ILogger;
+        import mx.logging.Log;
+        import mx.utils.ObjectUtil;
+
+        private static const log:ILogger = Log.getLogger("Main");
+
+        private var extension:Extension;
+
+        private function initializeApplication():void
+        {
+            Log.addTarget(new ConsoleTarget());
+            Log.addTarget(new TextTarget(output));
+
+            log.info("started: debug {0}", Capabilities.isDebugger);
+            NativeApplication.nativeApplication.addEventListener(Event.EXITING, onExit, false, 0, true);
+
+            //Capabilities.isDebugger
+            extension = new Extension();
+        }
+
+        private function onExit(event:Event):void
+        {
+            extension.dispose();
+        }
+
+        private function onClick(event:MouseEvent):void
+        {
+            log.info("test result: " + extension.showDialog(true, 0, "Нажмите любую кнопку"));
+        }
+
+        private function onUncaughtError(event:UncaughtErrorEvent):void
+        {
+            log.error(ObjectUtil.toString(event.error));
+        }
+        ]]>
+	</fx:Script>
+    <s:VGroup height="100%" width="100%">
+        <s:TextArea id="output" width="100%" height="100%" fontFamily="Courier new" editable="false"/>
+        <s:Button label="Test" click="onClick(event)"/>
+    </s:VGroup>
+</s:Application>
