@@ -52,7 +52,7 @@ EndProcedure
 Procedure ModalMessage(*params.MessageParameters)
   Define result.l, code.l
   code = MessageRequester(*params\title, *params\text, *params\dwFlags)
-  result = FREDispatchStatusEventAsync(*params\ctx, asGlobal("closed"), asGlobal(Str(code)))
+  result = FREDispatchStatusEventAsync(*params\ctx, asGlobal("showDialog"), asGlobal(Str(code)))
   *log\Debug (ResultDescription(result, "FREDispatchStatusEventAsync"))
 EndProcedure
 
@@ -70,20 +70,20 @@ ProcedureC.l showDialog(ctx.l, funcData.l, argc.l, *argv.FREObjectArray)
   
   result = FREGetObjectType(actionScriptObject, @type)
   *log\Debug("result=" + ResultDescription(result, "FREGetObjectType"))
-  *log\info("type=" + TypeDescription(type))
+  *log\info("ContextActionScriptData: type=" + TypeDescription(type))
   
   result = FREGetObjectAsInt32(actionScriptObject, @actionScriptInt)
   *log\Debug("result=" + ResultDescription(result, "FREGetObjectAsInt32"))
   
-  *log\info("actionScriptInt: " + Str(actionScriptInt))
+  *log\info("ContextActionScriptData: actionScriptInt=" + Str(actionScriptInt))
 
   
   ;function data example
   Define funcDataS.s
   funcDataS = PeekS(funcData, -1, #PB_Ascii)
-  *log\info("funcData=" + funcDataS)
+  *log\info("FunctionData: " + funcDataS)
   
-  *log\info("arg size: " + Str(fromULong(argc)))
+  *log\info("Method args size: " + Str(fromULong(argc)))
 
   Define resultObject.l, length.l, booleanArg.l, dwFlags.l, message.s, *string.Ascii
   
@@ -97,23 +97,23 @@ ProcedureC.l showDialog(ctx.l, funcData.l, argc.l, *argv.FREObjectArray)
   *log\Debug("result=" + ResultDescription(result, "FREGetObjectAsUTF8"))
   message = PeekS(*string, fromULong(length) + 1)
   
-  *log\info("booleanArg=" + Str(fromULong(booleanArg)))
-  *log\info("dwFlags=" + Str(dwFlags))
-  *log\info("message=" + Utf8ToUnicode(message))
+  *log\info("Argument: booleanArg=" + Str(fromULong(booleanArg)))
+  *log\info("Argument: dwFlags=" + Str(dwFlags))
+  *log\info("Argument: message=" + Utf8ToUnicode(message))
   
   ;native data example
   Define native.l, nativeData.s
   result = FREGetContextNativeData(ctx, @native)
   *log\Debug(ResultDescription(result, "FREGetContextNativeData"))
   nativeData = PeekS(native, -1, #PB_Ascii)
-  *log\info("FREGetContextNativeData=" + nativeData)
+  *log\info("FREGetContextNativeData: " + nativeData)
   
   
   Define *params.MessageParameters = AllocateMemory(SizeOf(MessageParameters))
   *params\ctx = ctx
   *params\title = "PureBasic"
   *params\text = Utf8ToUnicode(message)
-  *params\dwFlags = dwFlags;
+  *params\dwFlags = dwFlags
   CreateThread(@ModalMessage(), *params)
   
   ;return Boolean.TRUE
@@ -184,6 +184,7 @@ EndProcedure
 
 
 ; IDE Options = PureBasic 4.61 (Windows - x86)
-; CursorPosition = 22
+; CursorPosition = 108
+; FirstLine = 81
 ; Folding = --
 ; EnableXP
