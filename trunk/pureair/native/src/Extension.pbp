@@ -10,20 +10,20 @@
   <section name="data">
     <explorer view="" pattern="0"/>
     <log show="1"/>
-    <lastopen date="2012-07-03 15:39" user="Dookie" host="BANANAS"/>
+    <lastopen date="2012-07-03 16:21" user="Dookie" host="BANANAS"/>
   </section>
   <section name="files">
     <file name="Extension.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
-      <fingerprint md5="82598ca509872a867efd6d1534663ccc"/>
+      <fingerprint md5="58a491a8357991c8736db4b1cdafb25c"/>
     </file>
     <file name="FlashRuntimeExtensions.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
-      <fingerprint md5="b03fe5b65e90bf8fa36585b0c87c7ec2"/>
+      <fingerprint md5="6ba0f17fb7108b0e01bdc086af04c86e"/>
     </file>
     <file name="Logger.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
-      <fingerprint md5="a16de7cfa1b87753cda4a19f1785ec51"/>
+      <fingerprint md5="b909e44d2abfd562eddd2a28eca94d39"/>
     </file>
     <file name="Unicode.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
@@ -43,8 +43,8 @@
       <options asm="1" unicode="1" thread="1" xpskin="1" onerror="1"/>
       <temporaryexe value="source"/>
       <format exe="dll" cpu="5"/>
-      <compilecount enable="1" value="195"/>
-      <buildcount enable="1" value="194"/>
+      <compilecount enable="1" value="203"/>
+      <buildcount enable="1" value="202"/>
       <execonstant enable="1"/>
       <versioninfo enable="1">
         <field0 value="0,0,1,0"/>

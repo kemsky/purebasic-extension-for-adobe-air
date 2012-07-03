@@ -518,13 +518,41 @@ Procedure.s ResultDescription(result.l, fname.s)
     Default
       message = "unknown result(" + Str(result) + ")"
   EndSelect
-  ProcedureReturn ("Function (" + fname + ") result " + message)
+  ProcedureReturn "Function (" + fname + ") result " + message
+EndProcedure
+
+Procedure.s TypeDescription(result.l)
+  Define message.s
+  
+  Select result
+    Case #FRE_TYPE_OBJECT   
+      message = "#FRE_TYPE_OBJECT"
+    Case #FRE_TYPE_NUMBER  
+      message = "#FRE_TYPE_NUMBER"
+    Case #FRE_TYPE_STRING
+      message = "#FRE_TYPE_STRING"
+    Case #FRE_TYPE_BYTEARRAY  
+      message = "#FRE_TYPE_BYTEARRAY"
+    Case #FRE_TYPE_ARRAY 
+      message = "#FRE_TYPE_ARRAY"
+    Case #FRE_TYPE_VECTOR   
+      message = "#FRE_TYPE_VECTOR"
+    Case #FRE_TYPE_BITMAPDATA          
+      message = "#FRE_TYPE_BITMAPDATA"
+    Case #FRE_TYPE_BOOLEAN      
+      message = "#FRE_TYPE_BOOLEAN"
+    Case #FRE_TYPE_NULL     
+      message = "#FRE_TYPE_NULL"
+    Default
+      message = "unknown type(" + Str(result) + ")"
+  EndSelect
+  ProcedureReturn message
 EndProcedure
  
  
 
 ; IDE Options = PureBasic 4.61 (Windows - x86)
-; CursorPosition = 107
-; FirstLine = 90
+; CursorPosition = 520
+; FirstLine = 479
 ; Folding = -
 ; EnableXP
