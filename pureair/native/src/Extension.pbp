@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://www.purebasic.com/namespace" version="1.0" creator="PureBasic 4.61 (Windows - x86)">
+  <section name="config">
+    <options closefiles="1" openmode="0" name="Extension"/>
+    <comment>
+      Example of Adobe Air extension
+    </comment>
+  </section>
+  <section name="data">
+    <explorer view="" pattern="0"/>
+    <log show="1"/>
+    <lastopen date="2012-07-03 14:36" user="Dookie" host="BANANAS"/>
+  </section>
+  <section name="files">
+    <file name="Extension.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="e60c9fca83febb03569b0b2781efecb6"/>
+    </file>
+    <file name="FlashRuntimeExtensions.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="b03fe5b65e90bf8fa36585b0c87c7ec2"/>
+    </file>
+    <file name="Logger.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="a16de7cfa1b87753cda4a19f1785ec51"/>
+    </file>
+    <file name="Unicode.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="7dcbcff61c546fcaa56da1763dd09517"/>
+    </file>
+    <file name="Unsigned.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="b6f51f9ec8065616f2efe7c3cdb8798c"/>
+    </file>
+  </section>
+  <section name="targets">
+    <target name="Extension" enabled="1" default="1">
+      <inputfile value="Extension.pb"/>
+      <outputfile value="../bin/pureair.dll"/>
+      <compiler version="PureBasic 4.61 (Windows - x86)"/>
+      <executable value="..\bin\pureair.dll"/>
+      <options asm="1" unicode="1" thread="1" xpskin="1" onerror="1"/>
+      <temporaryexe value="source"/>
+      <format exe="dll" cpu="5"/>
+      <compilecount enable="1" value="188"/>
+      <buildcount enable="1" value="187"/>
+      <execonstant enable="1"/>
+      <versioninfo enable="1">
+        <field0 value="0,0,1,0"/>
+        <field1 value="0,0,1,0"/>
+        <field2 value="PureBasic"/>
+        <field3 value="PureBasic"/>
+        <field4 value="0,0,1,0"/>
+        <field5 value="0,0,1,0"/>
+        <field6 value="PureBasic Extension"/>
+        <field7 value="PureBasic Extension"/>
+        <field8 value="pureair.dll"/>
+        <field15 value="VOS_NT_WINDOWS32"/>
+        <field16 value="VFT_DLL"/>
+      </versioninfo>
+    </target>
+  </section>
+</project>

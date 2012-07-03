@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright: (c) 2012. Turtsevich Alexander
+  ~
+  ~ Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.html
+  -->
+
+<project default="build.all" basedir="." name="Air native extension">
+
+    <property name="project.dir" location="."/>
+
+    <property environment="env" description="Environment variables"/>
+
+    <property file="local.build.properties" description="Common properties for mac/win"/>
+
+    <property name="platform" value="Windows-x86"/>
+
+    <property name="native.binary.name" value="${native}.dll"/>
+
+    <property name="native.dir" location="${project.dir}/${native}/native"/>
+
+
+    <!--Air SDK-->
+    <property name="sdk.dir" location="${env.AIR_SDK_HOME}" description="Adobe Air SDK home"/>
+
+    <property name="amxmlc" value="${sdk.dir}/bin/amxmlc.bat" description="Air mxmlc compiler"/>
+
+    <property name="adt" value="${sdk.dir}/bin/adt.bat"  description="Air packager"/>
+
+    <property name="acompc" value="${sdk.dir}/bin/acompc.bat" description="Air library compiler"/>
+
+    <property name="aasdoc" value="${sdk.dir}/bin/aasdoc.bat" description="Air documentation compiler"/>
+
+
+    <property name="installer.name" value="${application}Installer.exe" description="Application package name"/>
+
+    <property name="release.dir" location="${project.dir}/release"/>
+    
+    <property name="app.dir" location="${project.dir}/application"/>
+
+    <property name="app.lib.dir" location="${app.dir}/lib"/>
+
+    <property name="app.ext.dir" location="${app.dir}/extensions"/>
+
+    <property name="app.ext.unpacked.dir" location="${app.ext.dir}/unpacked"/>
+
+    <property name="ane.dir" location="${project.dir}/${native}/ane/"/>
+
+    <property name="doc.dir" location="${project.dir}/${native}/doc/"/>
+
+
+
+    <property name="ane.src.dir" location="${ane.dir}/src"/>
+
+    <property name="app.src.dir" location="${app.dir}/src"/>
+
+    <!--keystore-->
+    <property name="keystore" location="${project.dir}/${keystore.name}"/>
+
+
+
+    <target name="build.all" description="Build all modules and create application installer">
+        <available file="${env.AIR_SDK_HOME}" property="sdk.set"/>
+
+        <fail message="AIR_SDK_HOME is not set or does not exist (${env.AIR_SDK_HOME})">
+            <condition>
+                <not>
+                    <isset property="sdk.set"/>
+                </not>
+            </condition>
+        </fail>
+
+        <info title="Build all" description="Build all modules and create application installer"/>
+        <echo message="AIR_SDK_HOME: ${sdk.dir}"/>
+        <echo message="    PLATFORM: ${platform}"/>
+        <echo message="    warnings: ${warnings}"/>
+        <echo message="       debug: ${debug}"/>
+        <antcall target="clean"/>
+        <antcall target="build.extension"/>
+        <antcall target="create.extension.package"/>
+        <antcall target="create.descriptor"/>
+        <antcall target="build.application"/>
+        <antcall target="create.application.package"/>
+    </target>
+
+    <target name="distribute" description="Collect all build artifacts">
+        <info title="Distribute" description="Collect all build artifacts"/>
+
+        <delete dir="${release.dir}" failonerror="true"/>
+        <mkdir dir="${release.dir}"/>
+
+        <copy file="${app.lib.dir}/${native}.swc" todir="${release.dir}"/>
+        <copy file="${app.ext.dir}/${native}.ane" todir="${release.dir}"/>
+        <copy file="${project.dir}/${installer.name}" todir="${release.dir}"/>
+        <antcall target="native.generate.doc"/>
+        <zip zipfile="${release.dir}/{native}.zip">
+            <fileset dir="${doc.dir}">
+                <include name="**" />
+            </fileset>
+        </zip>
+        <info title="Distribute success" description="Release: ${release.dir}/${installer.name}"/>
+    </target>
+
+
+    <target name="build.application" description="Build Air application">
+        <info title="Build application" description="Build Air application"/>
+        <exec executable="${amxmlc}" failonerror="true">
+            <arg line="-library-path=${env.AIR_SDK_HOME}\frameworks\libs"/>
+            <arg line="-library-path+=${env.AIR_SDK_HOME}\frameworks\libs\air"/>
+            <arg line="-library-path+=${env.AIR_SDK_HOME}\frameworks\locale\{locale}"/>
+            <arg line="-locale en_US"/>
+            <arg line="${incremental}"/>
+            <arg line="-debug=${debug}"/>
+            <arg line="-warnings=${warnings}"/>
+            <arg line="-headless-server=true"/>
+            <arg line="-external-library-path+=${app.lib.dir}/${native}.swc"/>
+            <arg line="-output ${app.dir}/${application}.swf"/>
+            <arg line="-- ${app.src.dir}/${application}.mxml"/>
+        </exec>
+    </target>
+
+
+    <target name="create.application.package" description="Create application package for current OS">
+        <info title="Create application package" description="Create application package"/>
+        <exec executable="${adt}" failonerror="true" dir="${app.dir}" >
+            <arg line="-package"/>
+            <arg line="-XnoAneValidate"/>
+            <arg line="-storetype pkcs12"/>
+            <arg line="-keystore ${keystore}"/>
+            <arg line="-storepass ${storepass}"/>
+            <arg line="-tsa none"/>
+            <arg line="-target native"/>
+            <arg line="${project.dir}/${installer.name}"/>
+            <arg line="${manifest}"/>
+            <arg line="${application}.swf"/>
+            <arg line="-C ${app.src.dir} ${app.src.dir}/style/app"/>
+            <arg line="-extdir ${app.ext.dir}"/>
+        </exec>
+    </target>
+
+
+    <target name="build.extension" description="Build extension library">
+        <info title="Build extension" description="Build extension library"/>
+        <exec executable="${acompc}" failonerror="true">
+            <arg line="-locale en_US"/>
+            <arg line="${incremental}"/>
+            <arg line="-debug=${debug}"/>
+            <arg line="-warnings=${warnings}"/>
+            <arg line="-output ${app.lib.dir}/${native}.swc"/>
+            <arg line="-source-path+=${ane.src.dir}"/>
+            <arg line="-include-sources=${ane.src.dir}"/>
+        </exec>
+    </target>
+
+
+    <target name="create.extension.package" description="Create native extension for current OS">
+        <info title="Create native extension package (ANE)" description="Create native extension"/>
+
+        <property name="descriptor" value="${ane.dir}/extwin/extension.xml"/>
+
+        <!--temp dir for ane-->
+        <property name="temp" location="${native.dir}/bin"/>
+        <!--clean-->
+        <delete dir="${temp}" verbose="true" failonerror="true"/>
+        <!--create-->
+        <mkdir dir="${temp}"/>
+        <!--Extension descriptor-->
+        <copy file="${descriptor}" tofile="${temp}/extension.xml" overwrite="true" failonerror="true"/>
+        <replace file="${temp}/extension.xml" token="{native}" value="${native}"/>
+        <replace file="${temp}/extension.xml" token="{native.id}" value="${native.id}"/>
+        <replace file="${temp}/extension.xml" token="{copyright}" value="${copyright}"/>
+
+        <basename property="swc.name" file="${app.lib.dir}/${native}.swc"/>
+
+        <antcall target="build.native"/>
+
+        <!--Library-->
+        <copy file="${app.lib.dir}/${native}.swc" todir="${temp}" overwrite="true" failonerror="true"/>
+        <unzip src="${app.lib.dir}/${native}.swc" dest="${temp}" overwrite="true" failonemptyarchive="true">
+            <patternset>
+                <include name="library.swf"/>
+            </patternset>
+        </unzip>
+
+        <exec executable="${adt}" failonerror="true" dir="${temp}">
+            <arg line="-package"/>
+            <arg line="-storetype pkcs12"/>
+            <arg line="-storepass ${storepass}"/>
+            <arg line="-keystore ${keystore}"/>
+            <!--<arg line="-tsa none"/>-->
+            <arg line="-target ane"/>
+            <arg line="${app.ext.dir}/${native}.ane"/>
+            <arg line="extension.xml"/>
+            <arg line="-swc ${swc.name}"/>
+            <arg line="-platform ${platform} library.swf ${native}.dll"/>
+        </exec>
+    </target>
+
+
+    <target name="native.generate.doc" description="Create extension documentaion">
+        <delete file="${doc.dir}"/>
+        <exec executable="${aasdoc}" failonerror="true">
+            <arg line="-output ${doc.dir}"/>
+            <arg line="--doc-sources=${ane.src.dir}"/>
+        </exec>
+    </target>
+
+
+    <target name="clean" description="Remove old binaries">
+        <info title="Clean" description="Remove old binaries"/>
+        <delete file="${app.dir}/${application}.swf"/>
+        <delete file="${app.dir}/${application}.swf.cache"/>
+        <delete file="${app.lib.dir}/${native}.swc"/>
+        <delete file="${app.lib.dir}/${native}.swc.cache"/>
+        <delete file="${ane.dir}/${native.binary.name}"/>
+        <delete file="${app.ext.dir}/${native}.ane"/>
+        <delete file="${ane.dir}/library.swf"/>
+        <delete file="${project.dir}/${application}Installer.exe"/>
+        <delete file="${release.dir}"/>
+        <delete file="${app.dir}/air-manifest.xml"/>
+        <delete dir="${app.ext.unpacked.dir}/${native}.ane"/>
+        <delete dir="${native.dir}/bin"/>
+    </target>
+
+
+    <target name="unzip.extesion.content" description="Exctract extension files for debug (-extDir)">
+        <delete dir="${app.ext.unpacked.dir}/${native}.ane" failonerror="true"/>
+        <unzip src="${app.ext.dir}/${native}.ane" dest="${app.ext.unpacked.dir}/${native}.ane" overwrite="true"/>
+    </target>
+
+
+    <target name="build.native" description="Compile native extension">
+        <exec executable="purebasic.exe" failonerror="true" dir="${native.dir}/src">
+            <arg line="/BUILD"/>
+            <arg line="Extension.pbp"/>
+        </exec>
+    </target>
+
+    <target name="create.descriptor" description="Creates application manifest">
+        <property name="descriptor" value="${app.dir}/descriptor/air-manifest.xml"/>
+        <copy file="${descriptor}" tofile="${app.dir}/air-manifest.xml" overwrite="true" failonerror="true"/>
+        <replace file="${app.dir}/air-manifest.xml" token="{appname}" value="${application}"/>
+        <replace file="${app.dir}/air-manifest.xml" token="{native.id}" value="${native.id}"/>
+        <replace file="${app.dir}/air-manifest.xml" token="{copyright}" value="${copyright}"/>
+    </target>
+
+    <target name="version" description="update air version from PB version">
+        <exec executable="cscript.exe" failonerror="true">
+            <arg line="//nologo"/>
+            <arg line="version.vbs"/>
+            <arg line="${app.dir}/${manifest}"/>
+            <arg line="${native.dir}/bin/${native.binary.name}"/>
+        </exec>
+    </target>
+
+
+    <target name="before.run">
+        <antcall target="build.extension"/>
+        <antcall target="create.extension.package"/>
+        <antcall target="unzip.extesion.content"/>
+        <antcall target="create.descriptor"/>
+        <!--<antcall target="build.application"/>-->
+    </target>
+
+    <macrodef name="info">
+        <attribute name="title" default=""/>
+        <attribute name="description" default=""/>
+        <sequential>
+            <echo message="_______________________________________________________________________"/>
+            <echo message="[@{title}] -  ${platform}"/>
+            <echo message="......................................................................."/>
+            <echo message="@{description}"/>
+            <echo message="_______________________________________________________________________"/>
+            <echo message=""/>
+            <echo message=""/>
+        </sequential>
+    </macrodef>
+</project>

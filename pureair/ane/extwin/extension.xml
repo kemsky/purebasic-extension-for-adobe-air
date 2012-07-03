@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension xmlns="http://ns.adobe.com/air/extension/3.1">
+    <id>{native.id}</id>
+    <name>{native}</name>
+    <copyright>{copyright}</copyright>
+    <description>Extenion for Adobe AIR</description>
+    <versionNumber>1.0.0</versionNumber>
+    <platforms>
+        <platform name="Windows-x86">
+            <applicationDeployment>
+                <nativeLibrary>{native}.dll</nativeLibrary>
+                <initializer>initializer</initializer>
+                <finalizer>finalizer</finalizer>
+            </applicationDeployment>
+        </platform>
+    </platforms>
+</extension>
