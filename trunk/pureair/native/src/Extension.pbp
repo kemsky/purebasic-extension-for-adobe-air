@@ -10,12 +10,12 @@
   <section name="data">
     <explorer view="" pattern="0"/>
     <log show="1"/>
-    <lastopen date="2012-07-03 15:03" user="Dookie" host="BANANAS"/>
+    <lastopen date="2012-07-03 15:39" user="Dookie" host="BANANAS"/>
   </section>
   <section name="files">
     <file name="Extension.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
-      <fingerprint md5="e4e1bd3b428716a3979d389f8e4a477b"/>
+      <fingerprint md5="82598ca509872a867efd6d1534663ccc"/>
     </file>
     <file name="FlashRuntimeExtensions.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
@@ -43,8 +43,8 @@
       <options asm="1" unicode="1" thread="1" xpskin="1" onerror="1"/>
       <temporaryexe value="source"/>
       <format exe="dll" cpu="5"/>
-      <compilecount enable="1" value="189"/>
-      <buildcount enable="1" value="188"/>
+      <compilecount enable="1" value="195"/>
+      <buildcount enable="1" value="194"/>
       <execonstant enable="1"/>
       <versioninfo enable="1">
         <field0 value="0,0,1,0"/>
