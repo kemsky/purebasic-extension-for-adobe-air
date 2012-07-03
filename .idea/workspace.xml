@@ -5,21 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" readonly="true" id="5be7671b-94bf-42cb-96f2-9a87b97dec06" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/src/style/app/128px-PureBasic-logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/src/style/app/16px-PureBasic-logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/src/style/app/24px-PureBasic-logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/src/style/app/32px-PureBasic-logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/src/style/app/48px-PureBasic-logo.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/application/src/style/app/64px-PureBasic-logo.png" />
-      <change type="DELETED" beforePath="C:\Dev\habrhabr\trunk\application\src\style\app\usb_128.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Dev\habrhabr\trunk\application\src\style\app\usb_16.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Dev\habrhabr\trunk\application\src\style\app\usb_24.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Dev\habrhabr\trunk\application\src\style\app\usb_256.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Dev\habrhabr\trunk\application\src\style\app\usb_32.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Dev\habrhabr\trunk\application\src\style\app\usb_48.png" afterPath="" />
-      <change type="DELETED" beforePath="C:\Dev\habrhabr\trunk\application\src\style\app\usb_64.png" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/descriptor/air-manifest.xml" afterPath="$PROJECT_DIR$/application/descriptor/air-manifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/src/PureAir.mxml" afterPath="$PROJECT_DIR$/application/src/PureAir.mxml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pureair/ane/src/com/pure/Extension.as" afterPath="$PROJECT_DIR$/pureair/ane/src/com/pure/Extension.as" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pureair/native/src/Extension.pb" afterPath="$PROJECT_DIR$/pureair/native/src/Extension.pb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pureair/native/src/Extension.pbp" afterPath="$PROJECT_DIR$/pureair/native/src/Extension.pbp" />
     </list>
     <ignored path="pureair.iws" />
@@ -90,16 +79,16 @@
       <file leaf-file-name="Extension.as" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pureair/ane/src/com/pure/Extension.as">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="46" selection-start="2693" selection-end="2693" vertical-scroll-proportion="0.0">
+            <state line="33" column="36" selection-start="798" selection-end="798" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Extension.pb" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Extension.pb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pureair/native/src/Extension.pb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="123" column="10" selection-start="3548" selection-end="3548" vertical-scroll-proportion="0.0">
+            <state line="156" column="32" selection-start="4723" selection-end="4723" vertical-scroll-proportion="0.38869864">
               <folding />
             </state>
           </provider>
@@ -123,16 +112,16 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PureAir.mxml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="PureAir.mxml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/application/src/PureAir.mxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="54" selection-start="1396" selection-end="1396" vertical-scroll-proportion="0.714119">
+            <state line="42" column="67" selection-start="1413" selection-end="1413" vertical-scroll-proportion="-20.538462">
               <folding>
-                <marker date="1341315284390" expanded="false" signature="436:632" placeholder="..." />
-                <marker date="1341315284390" expanded="true" signature="805:1170" placeholder="{...}" />
-                <marker date="1341315284390" expanded="true" signature="1230:1274" placeholder="{...}" />
-                <marker date="1341315284390" expanded="true" signature="1340:1446" placeholder="{...}" />
-                <marker date="1341315284390" expanded="true" signature="1528:1596" placeholder="{...}" />
+                <marker date="1341318944281" expanded="false" signature="436:632" placeholder="..." />
+                <marker date="1341318944281" expanded="true" signature="805:1174" placeholder="{...}" />
+                <marker date="1341318944281" expanded="true" signature="1234:1278" placeholder="{...}" />
+                <marker date="1341318944281" expanded="true" signature="1344:1450" placeholder="{...}" />
+                <marker date="1341318944281" expanded="true" signature="1532:1600" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -163,10 +152,10 @@
         <option value="$PROJECT_DIR$/pureair/native/src/Unsigned.pb" />
         <option value="$PROJECT_DIR$/build.xml" />
         <option value="$PROJECT_DIR$/local.build.properties" />
-        <option value="$PROJECT_DIR$/application/src/PureAir.mxml" />
-        <option value="$PROJECT_DIR$/pureair/ane/src/com/pure/Extension.as" />
-        <option value="$PROJECT_DIR$/pureair/native/src/Extension.pb" />
         <option value="$PROJECT_DIR$/application/descriptor/air-manifest.xml" />
+        <option value="$PROJECT_DIR$/pureair/ane/src/com/pure/Extension.as" />
+        <option value="$PROJECT_DIR$/application/src/PureAir.mxml" />
+        <option value="$PROJECT_DIR$/pureair/native/src/Extension.pb" />
       </list>
     </option>
   </component>
@@ -277,6 +266,20 @@
               <option name="myItemId" value="application" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pureair" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="trunk" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="application" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
@@ -339,20 +342,6 @@
               <option name="myItemId" value="application" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pureair" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="trunk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="descriptor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
@@ -377,8 +366,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RunManager" selected="AIR.PureAir">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -405,24 +394,6 @@
       </method>
     </configuration>
     <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" adl_options="" air_descriptor_path="" air_program_params="" air_publisher_id="" air_root_dir_path="" air_run_mode="AppDescriptor" browser_family="FIREFOX" class_name="" debugger_sdk="Module SDK" html_or_swf_file_path="" launcher_type="OSDefault" main_class_name="" method_name="" module_name="" output_log_level="" package_name="" player_path="FlashPlayer.exe" port="0" run_mode="HtmlOrSwfFile" run_trusted="true" scope="Class" socket_policy_port="0" url_to_launch="http://">
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -463,8 +434,17 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
-    <configuration default="true" type="AirRunConfigurationType" factoryName="AIR" adl_options="" air_descriptor_path="" air_program_params="" air_publisher_id="" air_root_dir_path="" air_run_mode="AppDescriptor" browser_family="FIREFOX" debugger_sdk="Module SDK" html_or_swf_file_path="" launcher_type="OSDefault" main_class_name="" module_name="" player_path="FlashPlayer.exe" run_mode="HtmlOrSwfFile" run_trusted="true" url_to_launch="http://">
-      <RunnerSettings RunnerId="Profile" />
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -485,6 +465,15 @@
       <option name="PASS_PARENT_ENVS" value="true" />
       <module name="" />
       <envs />
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Make" enabled="true" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="AirRunConfigurationType" factoryName="AIR" adl_options="" air_descriptor_path="" air_program_params="" air_publisher_id="" air_root_dir_path="" air_run_mode="AppDescriptor" browser_family="FIREFOX" debugger_sdk="Module SDK" html_or_swf_file_path="" launcher_type="OSDefault" main_class_name="" module_name="" player_path="FlashPlayer.exe" run_mode="HtmlOrSwfFile" run_trusted="true" url_to_launch="http://">
+      <RunnerSettings RunnerId="Profile" />
       <method>
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
@@ -594,7 +583,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Data Sources" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -615,8 +604,8 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18623266" sideWeight="0.67070484" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32929516" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19583778" sideWeight="0.67070484" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32929516" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -736,16 +725,21 @@
         <state line="9" column="29" selection-start="299" selection-end="299" vertical-scroll-proportion="0.26198632" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/application/descriptor/air-manifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="56" selection-start="3843" selection-end="3843" vertical-scroll-proportion="1.3080407" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/local.build.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="10" selection-start="20" selection-end="20" vertical-scroll-proportion="0.019252548" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="236" column="30" selection-start="9812" selection-end="9812" vertical-scroll-proportion="0.0">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pureair/ane/src/com/pure/Extension.as">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="46" selection-start="2693" selection-end="2693" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pureair/ane/extwin/extension.xml">
@@ -758,37 +752,30 @@
         <state line="4" column="9" selection-start="28" selection-end="147" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pureair/native/src/Extension.pb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="123" column="10" selection-start="3548" selection-end="3548" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/application/descriptor/air-manifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="56" selection-start="3843" selection-end="3843" vertical-scroll-proportion="1.3080407">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/local.build.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="10" selection-start="20" selection-end="20" vertical-scroll-proportion="0.019252548">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/application/src/PureAir.mxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="54" selection-start="1396" selection-end="1396" vertical-scroll-proportion="0.714119">
+        <state line="42" column="67" selection-start="1413" selection-end="1413" vertical-scroll-proportion="-20.538462">
           <folding>
-            <marker date="1341315284390" expanded="false" signature="436:632" placeholder="..." />
-            <marker date="1341315284390" expanded="true" signature="805:1170" placeholder="{...}" />
-            <marker date="1341315284390" expanded="true" signature="1230:1274" placeholder="{...}" />
-            <marker date="1341315284390" expanded="true" signature="1340:1446" placeholder="{...}" />
-            <marker date="1341315284390" expanded="true" signature="1528:1596" placeholder="{...}" />
+            <marker date="1341318944281" expanded="false" signature="436:632" placeholder="..." />
+            <marker date="1341318944281" expanded="true" signature="805:1174" placeholder="{...}" />
+            <marker date="1341318944281" expanded="true" signature="1234:1278" placeholder="{...}" />
+            <marker date="1341318944281" expanded="true" signature="1344:1450" placeholder="{...}" />
+            <marker date="1341318944281" expanded="true" signature="1532:1600" placeholder="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pureair/ane/src/com/pure/Extension.as">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="36" selection-start="798" selection-end="798" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pureair/native/src/Extension.pb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="156" column="32" selection-start="4723" selection-end="4723" vertical-scroll-proportion="0.38869864">
+          <folding />
         </state>
       </provider>
     </entry>

@@ -31,7 +31,7 @@ package com.pure
         /**
          * Creates context
          * @param contextType default value is "PureAir"
-         * @param debugLevel extension debug level:
+         * @param debugLevel native extension debug level:
          * <ul>
          *    <li>#LOG_DEBUG      = 0</li>
          *    <li>#LOG_INFO       = 1</li>

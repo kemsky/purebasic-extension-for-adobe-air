@@ -9,11 +9,6 @@ XIncludeFile "FlashRuntimeExtensions.pb"
 
 Global *log.Logger
 
-Global hInst.l
-Global mainHWND.l
-Global processID.l
-
-
 Structure MessageParameters
   text.s
   title.s
@@ -24,8 +19,7 @@ EndStructure
 ProcedureDLL AttachProcess(Instance)
   ;- This procedure is called once, when the program loads the library
   ;  for the first time. All init stuffs can be done here (but not DirectX init)
-  hInst = Instance
-  processID = GetCurrentProcessId_()
+  Define processID.l = GetCurrentProcessId_()
   
   LOG_LEVEL = #LOG_DEBUG
   
@@ -34,7 +28,7 @@ ProcedureDLL AttachProcess(Instance)
   *log\info(#CRLF$)
   *log\info(#CRLF$)
   *log\info("----------------------------------------------------------------")
-  *log\info("AttachProcess: " + Str(processID) + ", instance = " + Str(hInst))
+  *log\info("AttachProcess: " + Str(processID) + ", instance = " + Str(Instance))
 EndProcedure
 
 
@@ -45,52 +39,16 @@ ProcedureDLL DetachProcess(Instance)
   FreeMemory(*log)
 EndProcedure
 
+
 ;- Both are called when a thread in a program call Or release (free) the DLL
 ProcedureDLL AttachThread(Instance)
   *log\Debug("AttachThread: " + Str(Instance))
 EndProcedure
-  
+
+
 ProcedureDLL DetachThread(Instance)
   *log\Debug("DetachThread: " + Str(Instance))
 EndProcedure
-
-Procedure EnumWindows(hWnd.l, *lParam.Long)
-  Define windowProcessId.l
-  GetWindowThreadProcessId_(hWnd, @windowProcessId)
-  
-  If (processID = windowProcessId)
-    Define ClassName.s{255}
-    GetClassName_(hWnd, @ClassName, 255)
-    
-    If (#AIR_CLASS= ClassName)
-      Define Title.s{255}
-      GetWindowText_(hWnd, @Title, 255)
-      *log\info("Found Air Window: hwnd=" + Str(hWnd) + ", ClassName=" + ClassName + ", Title=" + Title)
-      mainHWND = hWnd
-      *lParam\l = hWnd
-      ProcedureReturn #False
-    EndIf
-  EndIf
- 
-  ProcedureReturn #True
-EndProcedure
-
-Procedure LogError()
-   Define error.l
-   error = GetLastError_()
-   If error
-      Define *Memory, length.l, err_msg$
-      *Memory = AllocateMemory(255)
-      length = FormatMessage_(#FORMAT_MESSAGE_FROM_SYSTEM, #Null, error, 0, *Memory, 255, #Null)
-      If length > 1 ; Some error messages are "" + Chr (13) + Chr (10)... stoopid M$... :(
-         err_msg$ = PeekS(*Memory, length - 2)
-      Else
-      err_msg$ = "Unknown error!"
-      EndIf
-      FreeMemory(*Memory)
-      *log\error(err_msg$)
-   EndIf
-EndProcedure 
 
 
 Procedure ModalMessage(*params.MessageParameters)
@@ -100,95 +58,97 @@ Procedure ModalMessage(*params.MessageParameters)
   *log\Debug (ResultDescription(result, "FREDispatchStatusEventAsync"))
 EndProcedure
 
-
-
+;CDecl
 ProcedureC.l showDialog(ctx.l, funcData.l, argc.l, *argv.FREObjectArray)
-  *log\Debug("showDialog")
+  *log\Debug("Invoked showDialog")
   
-  Define fd.s
-  fd = PeekS(funcData, -1, #PB_Ascii)
-  *log\Debug("funcData=" + fd)
+  ;function data example
+  Define funcDataS.s
+  funcDataS = PeekS(funcData, -1, #PB_Ascii)
+  *log\Debug("funcData=" + funcDataS)
   
   *log\Debug("arg size: " + Str(fromULong(argc)))
 
-  Define result.l, resultObject.l, length.l, arg1.l, dwFlags.l, arg3.s, *string.Ascii
+  Define result.l, resultObject.l, length.l, booleanArg.l, dwFlags.l, message.s, *string.Ascii
   
-  result = FREGetObjectAsBool(*argv\object[0], @arg1)
-  *log\Debug("result=" + ResultDescription(result, "FREGetObjectAsBool") + ", arg1=" + Str(fromULong(arg1)))
+  result = FREGetObjectAsBool(*argv\object[0], @booleanArg)
+  *log\Debug("result=" + ResultDescription(result, "FREGetObjectAsBool"))
   
   result = FREGetObjectAsInt32(*argv\object[1], @dwFlags)
-  *log\Debug("result=" + ResultDescription(result, "FREGetObjectAsInt32") + ", dwFlags=" + Str(dwFlags))
+  *log\Debug("result=" + ResultDescription(result, "FREGetObjectAsInt32"))
   
-  length = 1000
   result = FREGetObjectAsUTF8(*argv\object[2], @length, @*string)
   *log\Debug("result=" + ResultDescription(result, "FREGetObjectAsUTF8"))
-  *log\Debug("length=" + Str(fromULong(length)))
-  arg3 = PeekS(*string, fromULong(length) + 1)
-  *log\Debug("arg3=" + Utf8ToUnicode(arg3))
+  message = PeekS(*string, fromULong(length) + 1)
   
-  Define native.l
+  *log\Debug("booleanArg=" + Str(fromULong(booleanArg)))
+  *log\Debug("dwFlags=" + Str(dwFlags))
+  *log\Debug("message=" + Utf8ToUnicode(message))
+  
+  ;native data example
+  Define native.l, nativeData.s
   result = FREGetContextNativeData(ctx, @native)
-  fd = PeekS(native, -1, #PB_Ascii)
-  *log\Debug("FREGetContextNativeData=" + fd)
-  *log\Debug(ResultDescription(result, "FRENewObjectFromBool"))
-  
-  Define hwnd.l
-  EnumWindows_(@EnumWindows(), @hwnd)
+  *log\Debug(ResultDescription(result, "FREGetContextNativeData"))
+  nativeData = PeekS(native, -1, #PB_Ascii)
+  *log\Debug("FREGetContextNativeData=" + nativeData)
   
   
   Define *params.MessageParameters = AllocateMemory(SizeOf(MessageParameters))
   *params\ctx = ctx
   *params\title = "PureBasic"
-  *params\text = Utf8ToUnicode(arg3)
+  *params\text = Utf8ToUnicode(message)
   *params\dwFlags = dwFlags;
   CreateThread(@ModalMessage(), *params)
   
-  
-  *log\info("hwnd=" + Str(hwnd))
-  
-  *log\Debug("test method ok")
-  
+  ;return Boolean.TRUE
   result = FRENewObjectFromBool(toULong(1), @resultObject)
   *log\Debug(ResultDescription(result, "FRENewObjectFromBool"))
   
   ProcedureReturn resultObject
 EndProcedure
 
-
+;CDecl
 ProcedureC contextInitializer(extData.l, ctxType.s, ctx.l, *numFunctions.Long, *functions.Long)
   *log\Debug("create context: " + Str(ctx) + "=" + Utf8ToUnicode(ctxType))
   
-  Define c.s = "тест"
-  *log\Debug (c)
-  *log\Debug("unicode: " + Utf8ToUnicode(c))
+  ;exported extension functions count:
+  Define size.l = 1 
   
-  Define size.l = 1
+  ;Array of FRENamedFunction:
   Dim f.FRENamedFunction(size - 1)
   
+  ;there is no unsigned long type in PB
   setULong(*numFunctions, size)
-
+  
+  ;If you want to return a string out of a DLL, the string has to be declared as Global before using it.
+  
+  ;method name
   f(0)\name = asGlobal("showDialog")
+  ;function data example
   f(0)\functionData = asGlobal("showDialog")
+  ;function pointer
   f(0)\function = @showDialog()
 
   *functions\l = @f()
   
+  ;some additional data can be stored
   extData = #Null
   
-  Define result.l, fre.s
-  fre = "FRESetContextNativeDataТест"
-  result = FRESetContextNativeData(ctx, asGlobal(fre))
-  *log\Debug(ResultDescription(result, "FRENewObjectFromBool"))
+  ;native data example
+  Define result.l
+  result = FRESetContextNativeData(ctx, asGlobal("FRESetContextNativeData"))
+  *log\Debug(ResultDescription(result, "FRESetContextNativeData"))
   
   *log\Debug("create context complete");
 EndProcedure 
 
-
+;CDecl
 ProcedureC contextFinalizer(ctx.l)
   *log\Debug("dispose context: " + Str(ctx))
 EndProcedure 
 
 
+;CDecl
 ProcedureCDLL initializer(extData.l, *ctxInitializer.Long, *ctxFinalizer.Long)
   *log\Debug("initialize extension")
   extData = #Null
@@ -197,7 +157,8 @@ ProcedureCDLL initializer(extData.l, *ctxInitializer.Long, *ctxFinalizer.Long)
   *log\Debug("initialize extension complete")
 EndProcedure 
 
-
+;CDecl
+;this method is never called on Windows...
 ProcedureCDLL finalizer(extData.l)
   *log\Debug("finalize extension")
 EndProcedure 
@@ -206,7 +167,7 @@ EndProcedure
 
 
 ; IDE Options = PureBasic 4.61 (Windows - x86)
-; CursorPosition = 142
-; FirstLine = 102
-; Folding = ---
+; CursorPosition = 87
+; FirstLine = 105
+; Folding = --
 ; EnableXP
